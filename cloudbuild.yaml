@@ -4,15 +4,12 @@ steps:
     args:
       - '-c'
       - |
-        # Save SSH key from Secret Manager
         mkdir -p ~/.ssh
         echo "$CLOUDBUILD_SSH_KEY" > ~/.ssh/deploy_key
         chmod 600 ~/.ssh/deploy_key
-
-        # SSH into VM and run deploy script
         ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no gopiguddeti1405@35.184.158.97 "~/deploy.sh"
 
 availableSecrets:
   secretManager:
-    - versionName: "projects/907487239008/secrets/cloudbuild_ssh_key/versions/1"
+    - versionName: "projects/web-app-311/secrets/cloudbuild_ssh_key/versions/1"
       env: ["CLOUDBUILD_SSH_KEY"]
